@@ -74,7 +74,7 @@ const WeeklyUpdatesContainer = ({
             src={imageId}
           />
           <div className="self-stretch relative leading-[27px]">
-            Fickle Flight is your one-stop travel portal. We offer hassle free
+            GhumoWorld is your one-stop travel portal. We offer hassle free
             flight and hotel bookings. We also have all your flight needs in you
             online shop.
           </div>
