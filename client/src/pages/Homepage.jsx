@@ -4,6 +4,7 @@ import PopularDestinationsContainer from "../components/PopularDestinationsConta
 import RecommendedHolidaysContainer from "../components/RecommendedHolidaysContainer";
 import PopularStaysForm from "../components/PopularStaysForm";
 import WeeklyUpdatesContainer from "../components/WeeklyUpdatesContainer";
+import ProfilePage from "./ProfilePage";
 
 const Homepage = () => {
   return (
