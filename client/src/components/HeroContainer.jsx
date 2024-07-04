@@ -17,8 +17,8 @@ const HeroContainer = ({ className = "" }) => {
     <div
       className={`self-stretch flex flex-col items-center justify-start text-center text-42xl text-white font-baloo-bhai ${className}`}
     >
-      <Header />
-      <div className="self-stretch relative h-[640px]">
+      <Header className=" z-50" />
+      <div className=" z-0 self-stretch relative h-[640px]">
         <div className="absolute w-full top-[0px] right-[0px] left-[0px] [background:linear-gradient(78.78deg,_#114f8b_5.2%,_#2a9ad7)] h-[639.9px]" />
         <img
           className="absolute w-full top-[0.4px] right-[0px] left-[0px] max-w-full overflow-hidden h-[640px] object-cover"

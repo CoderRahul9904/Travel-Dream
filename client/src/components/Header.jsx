@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import AuthGoogle from "./authDropDown"
 const Header = ({ className = "", bgColor,textColor }) => {
 
   if( bgColor== " "){
@@ -68,20 +68,25 @@ const Header = ({ className = "", bgColor,textColor }) => {
               alt=""
               src="/notification1.svg"
             />
-            <button onClick={handleProfileNavigation} className=" bg-transparent cursor-pointer">
-            <img
-              className="rounded-19xl w-9 h-9 object-cover"
-              alt=""
-              src="/top_avatar@2x.png"
-            />
-            </button>
-            
+            <div className=" flex gap-5 sm:gap-0 rounded-xl sm:border-none justify-center items-center"> 
+              <button onClick={handleProfileNavigation} className=" bg-transparent cursor-pointer">
+                  <img
+                     className="rounded-19xl w-9 h-9 object-cover overflow-hidden"
+                     alt=""
+                     src="/top_avatar@2x.png"
+                  />
+              </button>
+            </div>
+            <div className=" absolute right-28 ">
+                <AuthGoogle />
+            </div>
             <img
               className="relative w-6 h-6 overflow-hidden hidden md:flex"
               alt=""
               src="/notification.svg"
             />
           </div>
+          
         </div>
       </div>
     </header>
