@@ -3,7 +3,7 @@ import React from 'react'
 import WeeklyUpdatesContainer from '../components/WeeklyUpdatesContainer'
 import Header from '../components/Header'
 
-function ProfilePage({ bgImg,proImg }) {
+function ProfilePage() {
   return (
     <div className=' relative w-screen h-[500px] '>
         <img 
