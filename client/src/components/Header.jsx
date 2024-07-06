@@ -2,15 +2,18 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthGoogle from "./authDropDown"
+import { useSelector } from "react-redux";
 const Header = ({ className = "", bgColor,textColor }) => {
 
+  const {isLoggedIn}=useSelector((state) => state.user)
+  
   if( bgColor== " "){
     bgColor="transparent"
   }else{
     bgColor="bg-white h-[77px]"
   }
   const navigate = useNavigate();
-
+  
   const handleProfileNavigation =useCallback(()=>{
     navigate("/profile");
   }, [navigate])
@@ -77,9 +80,9 @@ const Header = ({ className = "", bgColor,textColor }) => {
                   />
               </button>
             </div>
-            <div className=" absolute right-28 ">
+            {!isLoggedIn && <div className=" absolute right-28 ">
                 <AuthGoogle />
-            </div>
+            </div>}
             <img
               className="relative w-6 h-6 overflow-hidden hidden md:flex"
               alt=""
