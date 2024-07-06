@@ -28,6 +28,7 @@ module.exports = {
           "200": "#1262af",
           "300": "#1262ae",
           "400": "rgba(18, 98, 175, 0.05)",
+          "500" : "#0099ff"
         },
         gainsboro: "rgba(226, 226, 226, 0.1)",
         lavender: "#ccdcec",

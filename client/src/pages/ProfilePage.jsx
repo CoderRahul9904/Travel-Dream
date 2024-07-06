@@ -3,7 +3,19 @@ import React from 'react'
 import WeeklyUpdatesContainer from '../components/WeeklyUpdatesContainer'
 import Header from '../components/Header'
 
+
+
 function ProfilePage() {
+    const handleLogout = () => {
+        localStorage.removeItem('googleToken')
+        console.log('Logged Out')
+        window.google.accounts.id.disableAutoSelect();
+        window.google.accounts.id.revoke(localStorage.getItem('googleToken'), () => {
+        console.log('Google logout');
+        // window.location.reload(); // Optionally reload the page
+        });
+      };
+    const token=true
   return (
     <div className=' relative w-screen h-[500px] '>
         <img 
@@ -16,6 +28,7 @@ function ProfilePage() {
             <Header bgColor=" " textColor="white" />
         </div>
         {/* Profile Header */}
+        {token && <div className=' '>
         <div className=' absolute top-[100px] left-[15%] w-[70%] sm:left-0 flex justify-evenly items-center rounded-3xl h-auto sm:w-full bg-stone-100'>
             <div className='w-[200px] bg-cornflowerblue-500 my-16 h-[200px] flex flex-col justify-start items-center rounded-full sm:w-[100px] sm:h-[100px] sm:rounded-[100px] overflow-hidden md:w-[150px] md:h-[150px] md:rounded-[150px]'>
                 {/* <img className=' w-full h-full object-fill' src={proImg} alt='Profile Image'/> */}
@@ -81,9 +94,18 @@ function ProfilePage() {
             <p>Rahula</p>
             
         </div>
+        <div onClick={handleLogout} className=' cursor-pointer absolute top-[1100px] left-[45%] w-[10%] flex justify-center items-center bg-stone-100 rounded-md h-auto'>
+          <div style={{ width: '24px', height: '24px', marginRight: '8px' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{ width: '100%', height: '100%' }}>
+               <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" fill="#0099ff" />
+            </svg>
+          </div>
+          <p className='font-roboto text-cornflowerblue-300'>LOGOUT</p>
+        </div>
 
+        </div>}
         {/* Footer */}
-        <div className=' absolute top-[1100px]'>
+        <div className=' absolute top-[1180px]'>
         <WeeklyUpdatesContainer
             imageDimensions="/subscribe-section-background@2x.png"
             imageId="/logo.svg"
