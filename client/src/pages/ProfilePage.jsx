@@ -2,20 +2,27 @@
 import React from 'react'
 import WeeklyUpdatesContainer from '../components/WeeklyUpdatesContainer'
 import Header from '../components/Header'
-
+import { googleLogout } from '@react-oauth/google';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../slices/UserSlice';
+import { useNavigate } from 'react-router-dom';
+import AuthGoogle from '../components/authDropDown';
 
 
 function ProfilePage() {
+    const dispatch = useDispatch();
+    const navigate=useNavigate()
+    const { isLoggedIn, googleToken } = useSelector((state) =>state.user)
     const handleLogout = () => {
+        googleLogout()
         localStorage.removeItem('googleToken')
+        dispatch(logout());
         console.log('Logged Out')
-        window.google.accounts.id.disableAutoSelect();
-        window.google.accounts.id.revoke(localStorage.getItem('googleToken'), () => {
-        console.log('Google logout');
-        // window.location.reload(); // Optionally reload the page
-        });
-      };
-    const token=true
+        navigate('/')
+
+    };
+    console.log(googleToken)
+    const token=isLoggedIn
   return (
     <div className=' relative w-screen h-[500px] '>
         <img 
@@ -28,7 +35,7 @@ function ProfilePage() {
             <Header bgColor=" " textColor="white" />
         </div>
         {/* Profile Header */}
-        {token && <div className=' '>
+        {token? <div className=' '>
         <div className=' absolute top-[100px] left-[15%] w-[70%] sm:left-0 flex justify-evenly items-center rounded-3xl h-auto sm:w-full bg-stone-100'>
             <div className='w-[200px] bg-cornflowerblue-500 my-16 h-[200px] flex flex-col justify-start items-center rounded-full sm:w-[100px] sm:h-[100px] sm:rounded-[100px] overflow-hidden md:w-[150px] md:h-[150px] md:rounded-[150px]'>
                 {/* <img className=' w-full h-full object-fill' src={proImg} alt='Profile Image'/> */}
@@ -103,7 +110,13 @@ function ProfilePage() {
           <p className='font-roboto text-cornflowerblue-300'>LOGOUT</p>
         </div>
 
-        </div>}
+        </div> :
+        <div className=' absolute top-[100px] left-[25%] w-[50%] flex flex-col justify-center gap-5 px-10  py-10 items-center sm:left-0 rounded-3xl h-auto sm:w-full bg-stone-100'>
+            <span className=' text-stone-800 text-19xl font-roboto'>Welcome, Traveller!</span>
+            <p className=' text-stone-700 text-13xl font-roboto'>
+            Login to get access to your goCash, profile & bookings, and stay updated on the best travel offers.</p>
+            <AuthGoogle />
+            </div>}
         {/* Footer */}
         <div className=' absolute top-[1180px]'>
         <WeeklyUpdatesContainer
