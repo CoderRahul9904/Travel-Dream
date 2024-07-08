@@ -11,6 +11,7 @@ import AuthGoogle from '../components/authDropDown';
 
 function ProfilePage() {
     const dispatch = useDispatch();
+    console.log("working")
     const navigate=useNavigate()
     const { isLoggedIn, googleToken } = useSelector((state) =>state.user)
     const handleLogout = () => {
