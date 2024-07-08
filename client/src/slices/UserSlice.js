@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
+console.log("working")
 const userSlice=createSlice({
     name: "user",
     initialState:{isLoggedIn: false,googleToken: null,},
