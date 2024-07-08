@@ -1,1 +1,14 @@
-console.log("Aur Auth kya bolti public")
+const express=require('express')
+const AuthRoute=express.Router()
+
+
+AuthRoute
+    .route('/get-info')
+    .get()
+
+
+
+
+
+
+module.exports=AuthRoute
