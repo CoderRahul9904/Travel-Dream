@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from '../slices/UserSlice';
 function AuthGoogle() {
   const dispatch = useDispatch();
-  const { isLoggedIn, googleToken } = useSelector((state) =>state.user)
+  const googleToken = useSelector((state) => state.user.googleToken);
   const googleId = '124526521008-qbc8uhv8i9kun6ciq2db6pgc2sdfujps.apps.googleusercontent.com';
   const handleGoogleLogin = async (response) => {
     const token = response.credential;
@@ -13,10 +13,10 @@ function AuthGoogle() {
     console.log('Login Success:', token);
     dispatch(login({ googleToken: token }));
   };
-  console.log('Updated googleToken:', googleToken);
-  // useEffect(() => {
-  //   console.log('Updated googleToken:', googleToken);
-  // }, [googleToken]);
+  
+  useEffect(() => {
+    console.log('Updated googleToken:', googleToken);
+  }, [googleToken]);
 
   const handleUnsuccessfulGoogleLogin = (response) => {
     console.error('Login Failed:', response);
