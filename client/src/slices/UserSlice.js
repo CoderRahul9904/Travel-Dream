@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-console.log("working")
+
 const userSlice=createSlice({
     name: "user",
     initialState:{isLoggedIn: false,googleToken: null,},
@@ -12,10 +12,14 @@ const userSlice=createSlice({
         logout(state,action){
             state.isLoggedIn = false;
             state.googleToken = null;
-        }
+        },
+        setToken(state, action) {
+            state.googleToken = action.payload.googleToken;
+            state.isLoggedIn = !!action.payload.googleToken;
+        },
     }
 })
 
-export const {login,logout}= userSlice.actions
+export const {login,logout, setToken}= userSlice.actions
 
 export default userSlice.reducer
