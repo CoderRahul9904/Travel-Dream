@@ -3,9 +3,22 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthGoogle from "./authDropDown"
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setToken } from "../slices/UserSlice";
+
 const Header = ({ className = "", bgColor,textColor }) => {
 
   const {isLoggedIn}=useSelector((state) => state.user)
+  const dispatch=useDispatch()
+
+  useEffect(() => {
+    const token = localStorage.getItem('googleToken');
+    console.log(token)
+    if (token) {
+      dispatch(setToken({ googleToken: token }));
+    }
+  }, [dispatch]);
   
   if( bgColor== " "){
     bgColor="transparent"
