@@ -11,7 +11,6 @@ import AuthGoogle from '../components/authDropDown';
 
 function ProfilePage() {
     const dispatch = useDispatch();
-    console.log("working")
     const navigate=useNavigate()
     const { isLoggedIn, googleToken } = useSelector((state) =>state.user)
     const handleLogout = () => {
@@ -22,7 +21,6 @@ function ProfilePage() {
         navigate('/')
 
     };
-    console.log(googleToken)
     const token=isLoggedIn
   return (
     <div className=' relative w-screen h-[500px] '>
