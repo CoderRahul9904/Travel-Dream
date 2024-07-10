@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 
 
-console.log("working")
+
 
 const addressSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
