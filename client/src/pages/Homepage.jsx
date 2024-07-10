@@ -6,6 +6,7 @@ import PopularStaysForm from "../components/PopularStaysForm";
 import WeeklyUpdatesContainer from "../components/WeeklyUpdatesContainer";
 
 const Homepage = () => {
+  console.log("working")
   return (
     <div className="relative bg-white w-full overflow-hidden flex flex-col items-center justify-start gap-[69px] hover:[background:linear-gradient(#fff,_#fff),_#87550a] sm:w-full sm:hover:bg-orange-200">
       <HeroContainer />
