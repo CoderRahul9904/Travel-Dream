@@ -1,13 +1,14 @@
-const express=require('express')
-const UserRoute=express.Router()
+// const express=require('express')
+// const UserRoute=express.Router()
+// const User=require('../controllers/userContoller')
+
+// UserRoute
+//     .route('/add-info')
+//     .post(User.ImportUserInfo)
 
 
-UserRoute
-    .route('/add-info')
 
 
 
 
-
-
-module.exports= UserRoute
+// module.exports= UserRoute
