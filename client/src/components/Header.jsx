@@ -1,24 +1,36 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import axios from "axios";
 import AuthGoogle from "./authDropDown"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setToken } from "../slices/UserSlice";
+import { login } from "../slices/UserSlice";
 
 const Header = ({ className = "", bgColor,textColor }) => {
 
-  const {isLoggedIn}=useSelector((state) => state.user)
+  const {isLoggedIn, userInfo}=useSelector((state) => state.user)
   const dispatch=useDispatch()
-
+  let googleToken=localStorage.getItem('token')
+  console.log(googleToken)
   useEffect(() => {
-    const token = localStorage.getItem('googleToken');
-    console.log(token)
-    if (token) {
-      dispatch(setToken({ googleToken: token }));
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/v1/GhumoWorld/profile', {
+          headers: {
+            Authorization: `Bearer ${googleToken}`,
+          },
+        });
+        console.log(response.data)
+        dispatch(login({ userInfo: response.data }));
+      } catch (error) {
+        console.error('Failed to fetch user profile:', error);
+      }
     }
-  }, [dispatch]);
+    if (googleToken) {
+      fetchUserProfile();
+    }
+  }, [googleToken, dispatch]);
   
   if( bgColor== " "){
     bgColor="transparent"
@@ -38,6 +50,9 @@ const Header = ({ className = "", bgColor,textColor }) => {
   const onSearchTextClick = useCallback(() => {
     navigate("/results-page");
   }, [navigate]);
+
+  const User=userInfo
+  console.log(User)
 
   return (
     <header
@@ -86,11 +101,12 @@ const Header = ({ className = "", bgColor,textColor }) => {
             />
             <div className=" flex gap-5 sm:gap-0 rounded-xl sm:border-none justify-center items-center"> 
               <button onClick={handleProfileNavigation} className=" bg-transparent cursor-pointer">
-                  <img
-                     className="rounded-19xl w-9 h-9 object-cover overflow-hidden"
-                     alt=""
-                     src="/top_avatar@2x.png"
-                  />
+                {isLoggedIn ? <img className="rounded-19xl w-9 h-9 object-cover overflow-hidden" src={User.picture} alt="Profile Img" />
+                :
+                <svg className="rounded-19xl w-8 h-8 object-cover overflow-hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> 
+                  <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/>
+                </svg>}
+                  
               </button>
             </div>
             {!isLoggedIn && <div className=" absolute right-28 ">
