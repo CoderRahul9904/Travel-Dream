@@ -20,7 +20,7 @@ function ProfilePage() {
         dispatch(logout());
         console.log('Logged Out')
         navigate('/')
-
+        console.log("commit")
     };
   return (
     <div className=' relative w-screen h-[500px] '>
