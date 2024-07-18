@@ -53,6 +53,7 @@ const Header = ({ className = "", bgColor,textColor }) => {
 
   const User=userInfo
   console.log(User)
+  
 
   return (
     <header
