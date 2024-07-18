@@ -20,17 +20,19 @@ exports.Auth_Verification= async(req,res) =>{
         });
         console.log(ticket)
         const payload = ticket.getPayload();
-        const { picture, email, name } = payload;
+        const { picture, email, name, given_name, family_name } = payload;
 
         let user = await User.findOne({ email });
 
         if (!user) {
-          user = new User({ email, name, picture });
+          user = new User({ email, name, picture, given_name, family_name });
           await user.save();
         } else {
           user.email = email;
           user.name = name;
           user.picture=picture;
+          user.given_name=given_name;
+          user.family_name=family_name;
           await user.save();
         }
 
@@ -74,7 +76,9 @@ exports.Profile=async(req,res)=>{
       res.status(200).json({
           name: userData.name,
           email: userData.email,
-          picture: userData.picture
+          picture: userData.picture,
+          given_name: userData.given_name,
+          family_name: userData.family_name
       });
   } catch (err) {
       console.error('Error fetching user data:', err.message);
