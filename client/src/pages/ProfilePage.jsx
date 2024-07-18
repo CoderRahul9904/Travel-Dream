@@ -20,8 +20,9 @@ function ProfilePage() {
         dispatch(logout());
         console.log('Logged Out')
         navigate('/')
-        console.log("commit")
+        
     };
+    
   return (
     <div className=' relative w-screen h-[500px] '>
         <img 
@@ -37,7 +38,7 @@ function ProfilePage() {
         {isLoggedIn && userInfo ? <div className=' '>
         <div className=' absolute top-[100px] left-[15%] w-[70%] sm:left-0 flex justify-evenly items-center rounded-3xl h-auto sm:w-full bg-stone-100'>
             <div className=' relative w-[180px] bg-cornflowerblue-500 my-16 h-[180px] flex flex-col justify-start items-center rounded-full sm:w-[100px] sm:h-[100px] sm:rounded-[100px] overflow-hidden md:w-[150px] md:h-[150px] md:rounded-[150px]'>
-                <img className=' text-13xl md:text-5xl text-white sm:text-lg w-full h-full object-cover' src={userInfo.picture} alt='Profile Image'></img>
+                <img className=' text-13xl md:text-5xl text-white text-center sm:text-lg w-full h-full object-cover' src={userInfo.picture} alt='Profile Image'></img>
                 <button className=' absolute bottom-6 rounded sm:hidden cursor-pointer bg-stone-600 text-sm text-stone-200'>Add Profile Photo</button>
             </div>
             <div className=' mx-10 flex flex-col gap-0'>
