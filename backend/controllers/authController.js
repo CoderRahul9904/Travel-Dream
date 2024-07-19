@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_KEY);
 
-
+console.log("working")
 
 exports.Auth_Verification= async(req,res) =>{
     const { tokenId } = req.body;
