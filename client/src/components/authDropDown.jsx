@@ -4,7 +4,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from "react-redux";
 import { login, logout } from '../slices/UserSlice';
 function AuthGoogle() {
-  console.log('working')
+  
   const dispatch = useDispatch();
   
   const googleId = '124526521008-qbc8uhv8i9kun6ciq2db6pgc2sdfujps.apps.googleusercontent.com';
