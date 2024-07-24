@@ -2,7 +2,7 @@
 
 const axios=require('axios')
 
-console.log("Every thing is fine here")
+
 
 exports.getFlightOffer=async(req,res)=>{
     const { originLocationCode,destinationLocationCode,departureDate}=req.body
