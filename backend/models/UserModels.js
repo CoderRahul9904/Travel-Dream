@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-
+const {userDB} =require('../db')
 const UserSchema= new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
@@ -14,6 +14,6 @@ const UserSchema= new mongoose.Schema({
 })
 
 
-const User=mongoose.model('UserInfo',UserSchema,'UserInfo')
+const User=userDB.model('UserInfo',UserSchema,'UserInfo')
 
 module.exports=User
