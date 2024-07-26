@@ -9,7 +9,7 @@ const LosAngelesContainer = ({ className = "" }) => {
         <img
           className="absolute h-[calc(100%_-_0.4px)] w-full top-[0.4px] right-[0px] bottom-[0px] left-[0px] max-w-full overflow-hidden max-h-full object-cover"
           alt=""
-          src="/banner-background1@2x.png"
+          src="/banner-background@2x.png"
         />
         <div className="absolute top-[50px] left-[0px] w-[1440px] flex flex-col items-start justify-start py-0 px-20 box-border gap-[8px] lg:pl-10 lg:pr-10 lg:box-border md:pl-6 md:pr-6 md:box-border">
           <div className="relative tracking-[0.02em] leading-[48px] inline-block w-[1280px] sm:text-13xl">
