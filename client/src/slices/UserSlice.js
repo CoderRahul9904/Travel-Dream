@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
+//hi
 const userSlice=createSlice({
     name: "user",
-    initialState:{isLoggedIn: false,googleToken: null,userInfo:null},
+    initialState:{isLoggedIn: false,googleToken: null,userInfo:null,latitude: null,longitude: null},
     reducers:{
         login(state,action){
             state.isLoggedIn = true;
@@ -15,6 +15,9 @@ const userSlice=createSlice({
             state.googleToken = null;
             state.userInfo=null;
         },
+        location(state,action){
+
+        }
     }
 })
 
