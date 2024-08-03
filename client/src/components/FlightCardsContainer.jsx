@@ -1,12 +1,89 @@
 import FlightContainer from "./FlightContainer";
 import FlightInfoContainer from "./FlightInfoContainer";
 import PropTypes from "prop-types";
-
+import { useSelector} from "react-redux";
+import { format } from "date-fns"
 const FlightCardsContainer = ({ className = "" }) => {
+
+  
+  const AvailableFlightsData=useSelector((state) => state.user)
+  const AllFlights=AvailableFlightsData.AvailableFlights
+  // if(AvailableFlightsData.AvailableFlights){
+  //   console.log(AvailableFlightsData.AvailableFlights)
+  // }else{
+  //   console.log(" Yet, not Fetched")
+  // }
+  const capitalizeString=(str)=>{
+    if(str.length == 0) return;
+    return str.split(' ').map(ele => ele[0].toUpperCase() + ele.slice(1).toLowerCase()).join(' ');
+  }
+
   return (
+    <>
     <div
       className={`flex flex-col items-start justify-start gap-[9px] text-left text-base text-dimgray-200 font-roboto ${className}`}
     >
+      <div>
+      {AllFlights ? <div>
+      {AllFlights.data.slice(0, 7).map((flight, id) => {
+
+          //Arrival Time Logic
+          const arrivalTimeString=flight.itineraries[0].segments[0].arrival.at
+          const arrivalTimeDateObject= new Date(arrivalTimeString)
+          let arrivalTime;
+          let Array_arrivalTime;
+          if(arrivalTimeString){
+            Array_arrivalTime=format(arrivalTimeDateObject,'dd h:mm a').split(' ')
+            arrivalTime=Array_arrivalTime[1]+ ' ' + Array_arrivalTime[2]
+          } 
+          
+          //Depature Time Logic
+          const departureTimeString=flight.itineraries[0].segments[0].departure.at
+          const departureTimeDateObject= new Date(departureTimeString)
+          let departureTime;
+          let Array_departureTime;
+          if(departureTimeString){
+            Array_departureTime=format(departureTimeDateObject,'dd h:mm a').split(' ')
+            departureTime=Array_departureTime[1]+ ' ' + Array_departureTime[2]
+          } 
+          //Carrier Code Logic
+          const carrierCode = flight.itineraries[0].segments[0].carrierCode;
+          const airlineEntry = Object.entries(AllFlights.dictionaries.carriers).find(
+            ([code]) => code === carrierCode
+          );
+          const airlineName = airlineEntry ? capitalizeString(airlineEntry[1]) : "Unknown Airline";
+
+          //IataCode Arrival
+          const iatacodeArrival=flight.itineraries[0].segments[0].arrival.iataCode
+          
+
+          //IataCode Departure
+          const iatacodeDeparture=flight.itineraries[0].segments[0].departure.iataCode
+
+          //Number of Stopes
+          const no_of_stops=flight.itineraries[0].segments.length
+
+
+          //Total Time Duration for destination Logic
+          
+
+          return (
+            
+              <FlightInfoContainer
+                flightDetails="/sia.svg"
+                airlineName={airlineName}
+                departureTime={departureTime}
+                flightDuration={`15H 10M, ${no_of_stops} stop`}
+                arrivalTime={arrivalTime}
+                flightPrice="S$ 900"
+                iatacodeArrival={iatacodeArrival}
+                iatacodeDeparture={iatacodeDeparture}
+              />
+            
+         );
+      })}
+      </div> :
+      <div>
       <FlightContainer
         flightDetails="/turkish.svg"
         airlineName="Turkish Airlines"
@@ -76,14 +153,16 @@ const FlightCardsContainer = ({ className = "" }) => {
         flightDuration="26H 45M, 1-stop"
         arrivalTime="9:10 AM"
         flightPrice="S$ 859"
-      />
-      <button className="cursor-pointer [border:none] p-0 bg-[transparent] relative w-[220px] h-[72px]">
+      /></div>}
+      <button className="cursor-pointer [border:none] sm:justify-center p-0 bg-[transparent] relative w-[220px] h-[72px]">
         <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-md bg-cornflowerblue-200" />
         <div className="absolute top-[calc(50%_-_10.5px)] left-[calc(50%_-_81.5px)] text-lg tracking-[0.04em] font-medium font-roboto text-white text-center">
           Show more results
         </div>
-      </button>
+      </button> 
+      </div>
     </div>
+    </>
   );
 };
 

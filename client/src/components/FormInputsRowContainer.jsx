@@ -5,8 +5,8 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useNavigate } from "react-router-dom";
 import PropTypes, { string } from "prop-types";
-
-
+import { fetchedFlight } from "../slices/UserSlice";
+import { useDispatch } from "react-redux";
 const FormInputsRowContainer = ({
   className = "",
   propBorderRadius,
@@ -14,6 +14,8 @@ const FormInputsRowContainer = ({
   propPadding,
   onSearchTextClick,
 }) => {
+  const dispatch=useDispatch()
+
 
   const [ AirportsData, SetAirportData]=useState([])
   const getAirports = async () => {
@@ -56,6 +58,7 @@ const FormInputsRowContainer = ({
     }else if( selectedArrivalOption == null){
       localStorage.setItem('selectedArrivalOption', '');
     }
+    
   }, [selectedArrivalOption]);
 
   useEffect(() => {
@@ -105,6 +108,7 @@ const FormInputsRowContainer = ({
         departureDate: departureDate,
     })
     console.log(response.data)
+    dispatch(fetchedFlight({AvailableFlights: response.data}))
     }catch(err){
       console.error('Error fetching flight offers:', err.message);
     }

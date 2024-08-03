@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //hi
 const userSlice=createSlice({
     name: "user",
-    initialState:{isLoggedIn: false,googleToken: null,userInfo:null,latitude: null,longitude: null},
+    initialState:{isLoggedIn: false,googleToken: null,userInfo:null, AvailableFlights: null},
     reducers:{
         login(state,action){
             state.isLoggedIn = true;
@@ -15,12 +15,12 @@ const userSlice=createSlice({
             state.googleToken = null;
             state.userInfo=null;
         },
-        location(state,action){
-
+        fetchedFlight(state,action){
+            state.AvailableFlights=action.payload.AvailableFlights
         }
     }
 })
 
-export const {login,logout}= userSlice.actions
+export const {login,logout,fetchedFlight}= userSlice.actions
 
 export default userSlice.reducer

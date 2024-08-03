@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 
+
+
+
 const FlightContainer = ({
   className = "",
   flightDetails,
@@ -9,10 +12,12 @@ const FlightContainer = ({
   flightDuration,
   arrivalTime,
   flightPrice,
+  iatacodeArrival,
+  iatacodeDeparture,
 }) => {
   return (
     <div
-      className={`self-stretch rounded-md bg-white flex flex-row items-center justify-center py-0 px-[25px] gap-[50px] text-left text-base text-dimgray-200 font-roboto sm:flex-col sm:py-5 sm:px-0 sm:box-border ${className}`}
+      className={`self-stretch rounded-md bg-white flex flex-row hover:bg-blue-200 items-center justify-center py-0 px-[25px] gap-[50px] text-left text-base text-dimgray-200 font-roboto sm:flex-col sm:py-5 sm:px-0 sm:box-border ${className}`}
     >
       <div className="w-1/5 flex flex-row items-center justify-start gap-[7px] md:flex-col sm:flex-row sm:w-[100%!important] sm:ml-10">
         <img
@@ -28,7 +33,7 @@ const FlightContainer = ({
             {departureTime}
           </div>
           <div className="absolute w-[79.46%] top-[63.46%] left-[0%] text-base tracking-[0.26px] text-dimgray-100 inline-block mq428small:text-base">
-            SIN
+            {iatacodeDeparture}
           </div>
         </div>
         <div className="relative w-[121px] h-[55px] text-center text-base text-gray-100 sm:[transform:scale(0.9)]">
@@ -46,11 +51,11 @@ const FlightContainer = ({
             {arrivalTime}
           </div>
           <div className="absolute w-[81.21%] top-[63.46%] left-[17.65%] text-base tracking-[0.26px] text-dimgray-100 inline-block mq428small:text-base">
-            LAX
+            {iatacodeArrival}
           </div>
         </div>
       </div>
-      <div className="w-32 flex flex-row items-center justify-center text-center text-5xl text-orange-100">
+      <div className="w-32 flex flex-row items-center sm:bg-orange-50  sm:rounded-lg justify-center text-center text-5xl text-orange-100">
         <img
           className="relative max-w-full overflow-hidden h-[100px] sm:hidden"
           alt=""
