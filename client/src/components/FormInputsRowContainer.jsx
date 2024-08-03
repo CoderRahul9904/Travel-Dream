@@ -5,7 +5,8 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useNavigate } from "react-router-dom";
 import PropTypes, { string } from "prop-types";
-import { fetchedFlight } from "../slices/UserSlice";
+import { fetchedFlight } from "../slices/flightSlice";
+import PassengerClassSelector from "./TravellersClass";
 import { useDispatch } from "react-redux";
 const FormInputsRowContainer = ({
   className = "",
@@ -45,9 +46,11 @@ const FormInputsRowContainer = ({
 
   const handleArrivalChange=(event,newValue)=>{
     SetselectedArrivalOption(newValue)
+    console.log(selectedArrivalOption)
   }
   const handleDepartureChange=(event,newValue)=>{
     SetselectedDepartureOption(newValue)
+    console.log(selectedDepartureOption)
   }
   
   
@@ -58,7 +61,6 @@ const FormInputsRowContainer = ({
     }else if( selectedArrivalOption == null){
       localStorage.setItem('selectedArrivalOption', '');
     }
-    
   }, [selectedArrivalOption]);
 
   useEffect(() => {
@@ -150,6 +152,7 @@ const FormInputsRowContainer = ({
             <Autocomplete
               className="self-stretch"
               size="medium"
+              sx={{ width: "100%" }}
               disablePortal
               options={
                 options
@@ -188,18 +191,19 @@ const FormInputsRowContainer = ({
                   helperText=""
                 />
               )}
-              // defaultValue="Los Angeles (LA)"
+              
             />
           </div>
           <div className="flex-1 flex flex-col items-center justify-center p-[5px] sm:w-full sm:flex-[unset] sm:self-stretch">
             <div className="self-stretch">
               <DatePicker
-                label="Date"
+                className="self-stretch"
+                label="Departure Date"
                 value={selectOutlinedDateTimePickerValue || "MM-DD-YYYY"}
                 onChange={(newValue) => {
                   handleDatePickerChange(newValue)
                 }}
-                sx={{}}
+                sx={{ width: "100%" }}
                 slotProps={{
                   textField: {
                     variant: "outlined",
@@ -215,16 +219,43 @@ const FormInputsRowContainer = ({
               />
             </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center justify-center p-[5px] md:w-full md:text-left">
-          <button
+          <div className="flex flex-col items-center justify-center p-[5px] md:w-full md:text-left">
+            <button
             className="cursor-pointer [border:none] p-0 bg-orange-200 rounded w-[164px] h-14 overflow-hidden flex flex-col items-center justify-center [transition:0.3s] hover:bg-darkorange md:mr-[auto] sm:w-[100%!important]"
             onClick={onSearchFlightsButtonClick}
-          >
+            >
             <div className="relative text-mini tracking-[0.46px] leading-[26px] uppercase font-medium font-roboto text-white text-center inline-block w-[147px]">
               Search flights
             </div>
-          </button>
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col items-center justify-center p-[5px] sm:w-full sm:flex-[unset] sm:self-stretch">
+            <div className="self-stretch">
+            <DatePicker
+              className="self-stretch"
+              label="Return Date"
+              value={"MM-DD-YYYY"}
+              sx={{ width: "100%" }}
+              slotProps={{
+                textField: {
+                  variant: "outlined",
+                  size: "medium",
+                  fullWidth: true,
+                  required: false,
+                  autoFocus: false,
+                  error: false,
+                  color: "primary",
+                  placeholder: "Return Date",
+                },
+              }}
+            />
+            </div>
+          </div>
+          <div className=" flex-1 flex flex-col w-60 items-center justify-center p-[5px] sm:w-full sm:flex-[unset] sm:self-stretch">
+            <div className="self-stretch">
+              <PassengerClassSelector />
+            </div> 
+          </div>
         </div>
       </div>
     </LocalizationProvider>
