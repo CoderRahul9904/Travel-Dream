@@ -1,14 +1,21 @@
-const express=require('express')
-const app=express()
-const dotenv=require('dotenv')
-dotenv.config({path:`../client/configure.env`})
-const cors=require('cors')
+const express = require('express');
+const app = express();
+const AuthRoute = require('./routes/AuthRoute');
+const AmadeusRoute = require('./routes/AmadeusRoute');
+const AirportsRoute = require('./routes/AirportsRoute'); 
+const FormatDateRoute=require('./routes/FormatDateRoute')
 
-app.use(express.json())
-app.use(cors())
+const dotenv = require('dotenv');
+dotenv.config({ path: '../client/configure.env' });
 
-// console.log(process.env.DB)
-// console.log(process.env.DB_PASS)
+const cors = require('cors');
 
+app.use(express.json());
+app.use(cors());
 
-module.exports=app
+app.use('/api/v1/GhumoWorld', AuthRoute);
+app.use('/api/v1/GhumoWorld', FormatDateRoute);
+app.use('/api/v1/amadeus', AmadeusRoute);
+app.use('/api/v1/GhumoWorld/airports', AirportsRoute); 
+
+module.exports = app;

@@ -3,7 +3,6 @@ const { format } =require('date-fns')
 
 exports.FormatDate= async(req,res)=>{
     const { dateObj }=req.query;
-    
     if( !dateObj){
         return res.status(404).json({
             status: "fail",
