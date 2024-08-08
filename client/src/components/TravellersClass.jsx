@@ -110,26 +110,38 @@ const PassengersAndClassSelect = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleIncrement = (setter) => setter((prev) => prev + 1);
+  const handleIncrement = (setter) => {
+    setter((prev) => prev + 1);
+  }
   const handleDecrement = (setter) => setter((prev) => Math.max(0, prev - 1));
 
   const handleClassChange = (event) => setTravelClass(event.target.value);
 
+  let passengerLabel = `${adultCount} Adult${adultCount > 1 ? 's' : ''}`;
+  if(childrenCount >0 && infantCount <1 ){
+    passengerLabel=`${adultCount} Adult${adultCount > 1 ? 's' : ''}, ${childrenCount} Child${childrenCount > 1 ? 'ren' : ''}`;
+  }else if(infantCount > 0 && childrenCount < 1){
+    passengerLabel=`${adultCount} Adult${adultCount > 1 ? 's' : ''}, ${infantCount} Infant${infantCount > 1 ? 's' : ''}`
+  }else if(childrenCount < 1 && infantCount< 1){
+    passengerLabel = `${adultCount} Adult${adultCount > 1 ? 's' : ''}`;
+  }else{
+    passengerLabel=`${adultCount} Adult${adultCount > 1 ? 's' : ''}, ${childrenCount} Child${childrenCount > 1 ? 'ren' : ''}, ${infantCount} Infant${infantCount > 1 ? 's' : ''}`;
+  }
   return (
     <div>
       <FormControl variant="outlined" fullWidth>
         <InputLabel id="select-passengers-label">Passengers & Class</InputLabel>
         <Select
           labelId="select-passengers-label"
-          value={`${adultCount} Adult`}
+          value="Hello"
           onClick={handleOpen}
           label="Passengers & Class"
         >
-          <MenuItem value="">
-            Select Passengers & Class
+          <MenuItem className=' text-bold text-stone-900' value="Hello">
+            {passengerLabel}
           </MenuItem>
         </Select>
-      </FormControl>
+      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Select Passengers & Class</DialogTitle>
         <DialogContent>
@@ -192,6 +204,7 @@ const PassengersAndClassSelect = () => {
           <Button onClick={handleClose} color="primary">Save</Button>
         </DialogActions>
       </Dialog>
+      </FormControl>
     </div>
   );
 };

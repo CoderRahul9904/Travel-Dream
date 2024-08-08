@@ -25,5 +25,3 @@ export default function CalculateTotalTimeDurationOfJourney(Array_arrivalTime,Ar
         destinationInHours,destinationInMinutes
     }
 }
-
-//

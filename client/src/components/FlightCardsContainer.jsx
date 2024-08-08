@@ -3,11 +3,14 @@ import FlightInfoContainer from "./FlightInfoContainer";
 import PropTypes from "prop-types";
 import { useSelector} from "react-redux";
 import { format } from "date-fns"
+import CalculateTotalTimeDurationOfJourney from "../calclus/totalTimeDuration";
 const FlightCardsContainer = ({ className = "" }) => {
 
   
-  const AvailableFlightsData=useSelector((state) => state.user)
+  const AvailableFlightsData=useSelector((state) => state.flight)
   const AllFlights=AvailableFlightsData.AvailableFlights
+  console.log(AllFlights)
+
   // if(AvailableFlightsData.AvailableFlights){
   //   console.log(AvailableFlightsData.AvailableFlights)
   // }else{
@@ -28,7 +31,8 @@ const FlightCardsContainer = ({ className = "" }) => {
       {AllFlights.data.slice(0, 7).map((flight, id) => {
 
           //Arrival Time Logic
-          const arrivalTimeString=flight.itineraries[0].segments[0].arrival.at
+          const segmentLength=flight.itineraries[0].segments.length
+          const arrivalTimeString=flight.itineraries[0].segments[segmentLength-1].arrival.at
           const arrivalTimeDateObject= new Date(arrivalTimeString)
           let arrivalTime;
           let Array_arrivalTime;
@@ -54,18 +58,20 @@ const FlightCardsContainer = ({ className = "" }) => {
           const airlineName = airlineEntry ? capitalizeString(airlineEntry[1]) : "Unknown Airline";
 
           //IataCode Arrival
-          const iatacodeArrival=flight.itineraries[0].segments[0].arrival.iataCode
+          const iatacodeArrival=flight.itineraries[0].segments[segmentLength-1].arrival.iataCode
           
 
           //IataCode Departure
           const iatacodeDeparture=flight.itineraries[0].segments[0].departure.iataCode
 
           //Number of Stopes
-          const no_of_stops=flight.itineraries[0].segments.length
+          const no_of_stops=segmentLength
 
 
           //Total Time Duration for destination Logic
-          
+          const destinationInHourAndMintues=CalculateTotalTimeDurationOfJourney(Array_arrivalTime,Array_departureTime)
+          const destinationInHours=destinationInHourAndMintues.destinationInHours
+          const destinationInMintues=destinationInHourAndMintues.destinationInMinutes
 
           return (
             
@@ -73,7 +79,7 @@ const FlightCardsContainer = ({ className = "" }) => {
                 flightDetails="/sia.svg"
                 airlineName={airlineName}
                 departureTime={departureTime}
-                flightDuration={`15H 10M, ${no_of_stops} stop`}
+                flightDuration={`${destinationInHours}H ${destinationInMintues}M, ${no_of_stops} stop`}
                 arrivalTime={arrivalTime}
                 flightPrice="S$ 900"
                 iatacodeArrival={iatacodeArrival}

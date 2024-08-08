@@ -21,7 +21,7 @@ const FormInputsRowContainer = ({
   const [ AirportsData, SetAirportData]=useState([])
   const getAirports = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/v1/GhumoWorld/get-airports');
+      const response = await axios.get('http://localhost:3000/api/v1/GhumoWorld/airports/get-airports');
       SetAirportData(response.data.response)
     } catch (err) {
       console.error('Error fetching airports:', err);
