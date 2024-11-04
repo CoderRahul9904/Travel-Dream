@@ -63,7 +63,7 @@ const Header = ({ className = "", bgColor,textColor }) => {
     <header
       className={`self-stretch  flex flex-row ${bgColor} items-center justify-center py-[22px] px-20 box-border sticky w-full top-[0] text-left text-sm text-darkslategray-200 font-roboto lg:pl-10 lg:pr-10 lg:box-border md:pl-6 md:pr-6 md:box-border ${className}`}
     >
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center justify-between gap-8">
         <div
           className="relative w-[174px] h-[33px] overflow-hidden cursor-pointer"
           onClick={onFickleflightLogoContainerClick}
